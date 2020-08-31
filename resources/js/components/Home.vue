@@ -10,33 +10,49 @@
             </div>
         </div>
         <div>
-            <div class="card-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div
+                class="card-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+            >
                 <weather-card />
 
                 <div class="card">
                     <div class="header bg-yellow-400 text-center p-4">
-                        <h3>Sport</h3>
+                        <a href="/sports" class="hover:underline"
+                            ><h3>Sport</h3></a
+                        >
                     </div>
-                    <div class="body"></div>
+                    <div class="body">
+                        <h4>Sports Headline</h4>
+                    </div>
                 </div>
                 <news-card />
                 <div class="card">
                     <div class="header bg-yellow-400 text-center p-4">
-                        <a href="/photos" class="hover:underline"><h3>Photos</h3></a>
+                        <a href="/photos" class="hover:underline"
+                            ><h3>Photos</h3></a
+                        >
                     </div>
                     <div class="body">
-                        <div class="grid grid-cols-3 gap-4">
-                            <div
-                                v-for="(image, index) in photos"
-                                :key="index"
-                                class="relative"
-                            >
-                                <img
-                                    class="w-full object-cover"
-                                    :src="image"
-                                    alt=""
-                                />
+                        <div v-if="photos">
+                            <div class="grid grid-cols-3 gap-4">
+                                <div
+                                    v-for="(image, index) in photos"
+                                    :key="index"
+                                    class="relative"
+                                >
+                                    <img
+                                        class="w-full object-cover"
+                                        :src="image"
+                                        alt=""
+                                    />
+                                </div>
                             </div>
+                        </div>
+                        <div v-else>
+                            No photos yet.
+                            <a class="text-yellow-400" href="/photos"
+                                >Upload some here</a
+                            >
                         </div>
                     </div>
                 </div>
@@ -52,12 +68,12 @@ export default {
     data() {
         return {
             user: "",
-            photos:""
+            photos: ""
         };
     },
     mounted() {
         this.user = user;
-        this.photos = photos
+        this.photos = photos;
     }
 };
 </script>

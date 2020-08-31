@@ -15,8 +15,9 @@
                         <div class="col-md-6">
                             <input id="username" type="text"
                                 class="text-white w-full bg-transparent border-b-2 border-white @error('username') is-invalid @enderror"
-                                name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username">
-    
+                                name="username" value="{{ old('username') }}" required autocomplete="username" autofocus
+                                placeholder="Username">
+
                             @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -24,14 +25,14 @@
                             @enderror
                         </div>
                     </div>
-    
+
                     <div class="md:w-1/2 px-24">
-    
+
                         <div class="col-md-6">
                             <input id="password" type="password"
                                 class="text-white w-full bg-transparent border-b-2 border-white @error('password') is-invalid @enderror"
                                 name="password" required autocomplete="current-password" placeholder="Password">
-    
+
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -39,12 +40,12 @@
                             @enderror
                         </div>
                     </div>
-    
+
                 </div>
 
                 <div class="text-center">
                     <button type="submit" class="bg-yellow-400 px-20 py-3 rounded-full">Login</button>
-                    <div>
+                    <div class="py-5">
                         New to the Challenge? <a href="/register" class="text-yellow-400">Sign Up</a>
                     </div>
                 </div>

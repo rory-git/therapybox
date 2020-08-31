@@ -18,11 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/sports', 'MatchController@show');
+Route::get('/sports/{team}', 'MatchController@show');
 
 
 Route::put('/todo/{id}', 'TodoController@update');
-Route::delete('/todo/{id}', 'TodoController@destroy');
+Route::post('/todo/{id}/delete', 'TodoController@destroy');
 Route::post('/todo/create', 'TodoController@store');
 
 Route::post('/photos/{userid}', 'PhotosController@create');

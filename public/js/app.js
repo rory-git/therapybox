@@ -2045,6 +2045,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2307,6 +2323,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2316,7 +2337,8 @@ __webpack_require__.r(__webpack_exports__);
         username: "",
         password: "",
         password_confirmation: ""
-      }
+      },
+      errors: ""
     };
   },
   methods: {
@@ -2331,10 +2353,105 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     submit: function submit() {
-      console.log(this.form);
+      var _this = this;
+
       axios.post("/register", this.form).then(function (res) {
         location.reload();
+      })["catch"](function (errors) {
+        _this.errors = errors.response.data.errors;
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sports.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sports.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      query: "",
+      results: []
+    };
+  },
+  mounted: function mounted() {},
+  created: function created() {
+    this.fetchResults = _.debounce(this.fetchResults, 100);
+  },
+  methods: {
+    fetchResults: function fetchResults() {
+      var _this = this;
+
+      if (!this.query.length) {
+        return;
+      } // let loader = this.$loading.show();
+
+
+      axios.get("/api/sports/".concat(this.query)).then(function (res) {
+        _this.results = res.data; // loader.hide();
+      });
+    }
+  },
+  computed: {
+    resultsCount: function resultsCount() {
+      return Object.keys(this.results).length;
     }
   }
 });
@@ -2417,7 +2534,7 @@ __webpack_require__.r(__webpack_exports__);
     this.user = user;
   },
   created: function created() {
-    this.submit = _.debounce(this.submit, 300);
+    this.submit = _.debounce(this.submit, 900);
   },
   methods: {
     submit: function submit(index) {
@@ -2425,8 +2542,11 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.todos[index].title.length) {
         var loader = this.$loading.show();
-        axios.put("/api/todo/".concat(this.todos[index].id), this.todos[index]).then(function (res) {
-          _this.todos[index] = res.data;
+        axios.put("/api/todo/".concat(this.todos[index].id), {
+          todo: this.todos[index]
+        }).then(function (res) {
+          // this.todos[index] = res.data;
+          _this.todos = res.data;
           loader.hide();
         });
       }
@@ -2435,7 +2555,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var loader = this.$loading.show();
-      axios["delete"]("/api/todo/".concat(this.todos[index].id), this.todos[index]).then(function (res) {
+      axios.post("/api/todo/".concat(this.todos[index].id, "/delete"), {
+        user_id: this.user.id
+      }).then(function (res) {
         _this2.todos = res.data;
         loader.hide();
       })["catch"](function (e) {
@@ -2485,6 +2607,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2499,8 +2637,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var loader = this.$loading.show();
-      axios.put("/api/todo/".concat(this.todos[index].id), this.todos[index]).then(function (res) {
-        _this.todos[index] = res.data;
+      axios.put("/api/todo/".concat(this.todos[index].id), {
+        todo: this.todos[index],
+        limit: 3
+      }).then(function (res) {
+        _this.todos = res.data;
         loader.hide();
       });
     }
@@ -89985,19 +90126,39 @@ var render = function() {
             _vm._m(1),
             _vm._v(" "),
             _c("div", { staticClass: "body" }, [
-              _c(
-                "div",
-                { staticClass: "grid grid-cols-3 gap-4" },
-                _vm._l(_vm.photos, function(image, index) {
-                  return _c("div", { key: index, staticClass: "relative" }, [
-                    _c("img", {
-                      staticClass: "w-full object-cover",
-                      attrs: { src: image, alt: "" }
-                    })
+              _vm.photos
+                ? _c("div", [
+                    _c(
+                      "div",
+                      { staticClass: "grid grid-cols-3 gap-4" },
+                      _vm._l(_vm.photos, function(image, index) {
+                        return _c(
+                          "div",
+                          { key: index, staticClass: "relative" },
+                          [
+                            _c("img", {
+                              staticClass: "w-full object-cover",
+                              attrs: { src: image, alt: "" }
+                            })
+                          ]
+                        )
+                      }),
+                      0
+                    )
                   ])
-                }),
-                0
-              )
+                : _c("div", [
+                    _vm._v(
+                      "\n                        No photos yet.\n                        "
+                    ),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-yellow-400",
+                        attrs: { href: "/photos" }
+                      },
+                      [_vm._v("Upload some here")]
+                    )
+                  ])
             ])
           ]),
           _vm._v(" "),
@@ -90017,10 +90178,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "header bg-yellow-400 text-center p-4" }, [
-        _c("h3", [_vm._v("Sport")])
+        _c(
+          "a",
+          { staticClass: "hover:underline", attrs: { href: "/sports" } },
+          [_c("h3", [_vm._v("Sport")])]
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "body" })
+      _c("div", { staticClass: "body" }, [
+        _c("h4", [_vm._v("Sports Headline")])
+      ])
     ])
   },
   function() {
@@ -90221,6 +90388,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      _vm._l(_vm.errors, function(error) {
+        return _c("p", { staticClass: "text-red-400" }, [
+          _vm._v(_vm._s(error[0]))
+        ])
+      }),
+      0
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -90550,6 +90727,123 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sports.vue?vue&type=template&id=7b059e2a&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sports.vue?vue&type=template&id=7b059e2a& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h1", { staticClass: "text-white text-center mb-10" }, [
+      _vm._v("Sports")
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.fetchResults($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "md:flex justify-between" }, [
+            _c("div", { staticClass: "md:w-1/2 py-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.query,
+                    expression: "query"
+                  }
+                ],
+                staticClass:
+                  "text-white w-full bg-transparent border-b-2 border-white",
+                attrs: { type: "text", placeholder: "Input Winning Team" },
+                domProps: { value: _vm.query },
+                on: {
+                  keyup: _vm.fetchResults,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.query = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "results py-10" }, [
+      _vm.resultsCount > 0
+        ? _c("h4", { staticClass: "capitalize text-center text-white" }, [
+            _vm._v(
+              "\n            The teams " +
+                _vm._s(_vm.query) +
+                " won against:\n        "
+            )
+          ])
+        : _c("h4", { staticClass: "capitalize text-center text-white" }, [
+            _vm._v(
+              '\n            No results for "' +
+                _vm._s(_vm.query) +
+                '"\n        '
+            )
+          ]),
+      _vm._v(" "),
+      _c(
+        "ul",
+        _vm._l(_vm.results, function(team, index) {
+          return _c("li", { key: index, staticClass: "py-1 text-white" }, [
+            _vm._v("\n                " + _vm._s(team) + "\n            ")
+          ])
+        }),
+        0
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/2 md:text-right py-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "bg-yellow-400 px-20 py-3 rounded-full",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("\n                        Search\n                    ")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Todos.vue?vue&type=template&id=79d0db12&":
 /*!********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Todos.vue?vue&type=template&id=79d0db12& ***!
@@ -90627,7 +90921,7 @@ var render = function() {
                                               ],
                                               staticClass:
                                                 "text-white w-full bg-transparent border-b-2 border-white",
-                                              class: _vm.todos[index].complete
+                                              class: todo.complete
                                                 ? "line-through"
                                                 : null,
                                               attrs: { type: "text" },
@@ -90801,73 +91095,86 @@ var render = function() {
     _c(
       "div",
       { staticClass: "body" },
-      _vm._l(_vm.todos, function(todo, index) {
-        return _c(
-          "div",
-          {
-            key: index,
-            staticClass: "todo",
-            class: todo.complete ? "complete" : null
-          },
-          [
-            _c("div", { staticClass: "flex items-center justify-between" }, [
-              _c("p", { staticClass: "w-3/4" }, [_vm._v(_vm._s(todo.title))]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.todos[index].complete,
-                    expression: "todos[index].complete"
-                  }
-                ],
-                attrs: { type: "checkbox", name: "", id: "" },
-                domProps: {
-                  checked: todo.complete,
-                  checked: Array.isArray(_vm.todos[index].complete)
-                    ? _vm._i(_vm.todos[index].complete, null) > -1
-                    : _vm.todos[index].complete
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.todos[index].complete,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(
-                              _vm.todos[index],
-                              "complete",
-                              $$a.concat([$$v])
-                            )
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.todos[index],
-                              "complete",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.todos[index], "complete", $$c)
-                      }
-                    },
-                    function($event) {
-                      return _vm.submit(index)
+      [
+        _vm._l(_vm.todos, function(todo, index) {
+          return _c(
+            "div",
+            {
+              key: index,
+              staticClass: "todo",
+              class: todo.complete ? "complete" : null
+            },
+            [
+              _c("div", { staticClass: "flex items-center justify-between" }, [
+                _c("p", { staticClass: "w-3/4" }, [_vm._v(_vm._s(todo.title))]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.todos[index].complete,
+                      expression: "todos[index].complete"
                     }
-                  ]
-                }
-              })
+                  ],
+                  attrs: { type: "checkbox", name: "", id: "" },
+                  domProps: {
+                    checked: todo.complete,
+                    checked: Array.isArray(_vm.todos[index].complete)
+                      ? _vm._i(_vm.todos[index].complete, null) > -1
+                      : _vm.todos[index].complete
+                  },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$a = _vm.todos[index].complete,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.todos[index],
+                                "complete",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.todos[index],
+                                "complete",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.todos[index], "complete", $$c)
+                        }
+                      },
+                      function($event) {
+                        return _vm.submit(index)
+                      }
+                    ]
+                  }
+                })
+              ])
+            ]
+          )
+        }),
+        _vm._v(" "),
+        !_vm.todos.length
+          ? _c("div", [
+              _vm._v("\n            No tasks yet,\n            "),
+              _c(
+                "a",
+                { staticClass: "text-yellow-400", attrs: { href: "/tasks" } },
+                [_vm._v("Get Started")]
+              )
             ])
-          ]
-        )
-      }),
-      0
+          : _vm._e()
+      ],
+      2
     )
   ])
 }
@@ -108337,6 +108644,7 @@ var map = {
 	"./components/NewsCard.vue": "./resources/js/components/NewsCard.vue",
 	"./components/Photos.vue": "./resources/js/components/Photos.vue",
 	"./components/Register.vue": "./resources/js/components/Register.vue",
+	"./components/Sports.vue": "./resources/js/components/Sports.vue",
 	"./components/Todos.vue": "./resources/js/components/Todos.vue",
 	"./components/TodosCard.vue": "./resources/js/components/TodosCard.vue",
 	"./components/WeatherCard.vue": "./resources/js/components/WeatherCard.vue"
@@ -108920,6 +109228,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Register_vue_vue_type_template_id_97358ae4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Register_vue_vue_type_template_id_97358ae4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Sports.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/Sports.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Sports_vue_vue_type_template_id_7b059e2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sports.vue?vue&type=template&id=7b059e2a& */ "./resources/js/components/Sports.vue?vue&type=template&id=7b059e2a&");
+/* harmony import */ var _Sports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sports.vue?vue&type=script&lang=js& */ "./resources/js/components/Sports.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Sports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Sports_vue_vue_type_template_id_7b059e2a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Sports_vue_vue_type_template_id_7b059e2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Sports.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Sports.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Sports.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Sports.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sports.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Sports.vue?vue&type=template&id=7b059e2a&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/Sports.vue?vue&type=template&id=7b059e2a& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sports_vue_vue_type_template_id_7b059e2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Sports.vue?vue&type=template&id=7b059e2a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sports.vue?vue&type=template&id=7b059e2a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sports_vue_vue_type_template_id_7b059e2a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sports_vue_vue_type_template_id_7b059e2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -14,7 +14,7 @@ class MatchController extends Controller
      */
     public function index()
     {
-        //
+        return view('sports');
     }
 
     /**
@@ -44,18 +44,18 @@ class MatchController extends Controller
      * @param  \App\Match  $match
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Request $request, $team)
     {
-        $query = $request->name;
+        $query = $team;
 
-        $homeWins = Match::where('HomeTeam', $query)->where('FTR', 'H')->pluck('AwayTeam');
-        $awayWins = Match::where('AwayTeam', $query)->where('FTR', 'A')->pluck('HomeTeam');
+        $teamBeatAtHome = Match::where('HomeTeam', $query)->where('FTR', 'H')->pluck('AwayTeam');
+        $teamsBeatAway = Match::where('AwayTeam', $query)->where('FTR', 'A')->pluck('HomeTeam');
 
         $results = collect();
 
-        $results = $results->merge($homeWins)->merge($awayWins)->unique();
+        $results = $results->merge($teamBeatAtHome)->merge($teamsBeatAway)->unique();
         
-        return $results;
+        return collect($results);
     }
 
     /**

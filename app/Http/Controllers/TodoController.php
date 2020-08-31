@@ -36,14 +36,13 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        
         Todo::create([
             'title' => 'Untitled',
             'complete' => false,
             'user_id' => $request->user_id
         ]);
 
-        return Todo::all();
+        return Todo::where('user_id', $request->user_id)->get();
     }
 
     /**
@@ -79,9 +78,13 @@ class TodoController extends Controller
     {
         $todo = Todo::find($id);
 
-        $todo->update($request->all());
-        // return $request;
-        return $todo;
+        $todo->update($request->todo);
+
+        if($request->limit) {
+            return Todo::where('user_id', $todo->user_id)->get()->take($request->limit);
+        }
+      
+        return Todo::where('user_id', $todo->user_id)->get();
     }
 
     /**
@@ -90,10 +93,10 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         Todo::destroy($id);
 
-        return Todo::all();
+        return Todo::where('user_id', $request->user_id)->get();
     }
 }

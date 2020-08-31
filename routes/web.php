@@ -38,16 +38,5 @@ Route::get('/tasks', 'TodoController@index');
 // H=Home Win, D=Draw, A=Away Win
 
 
-route::get('sports', function() {
-    $query = 'Juventus';
-
-    $homeWins = Match::where('HomeTeam', $query)->where('FTR', 'H')->pluck('AwayTeam');
-    $awayWins = Match::where('AwayTeam', $query)->where('FTR', 'A')->pluck('HomeTeam');
-
-    $results = collect();
-
-    $results = $results->merge($homeWins)->merge($awayWins)->unique();
-     dd($results);
-
-});
+route::get('sports', 'MatchController@index');
 

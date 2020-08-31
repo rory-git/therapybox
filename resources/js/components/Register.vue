@@ -4,6 +4,9 @@
             <h1 class="text-white text-center">Dev Challenge</h1>
         </div>
         <div>
+            <p class="text-red-400" v-for="error in errors">{{ error[0] }}</p>
+        </div>
+        <div>
             <ValidationObserver v-slot="{ handleSubmit }">
                 <form @submit.prevent="handleSubmit(submit)">
                     <div class="flex flex-col justify-between">
@@ -50,7 +53,9 @@
                                         class=" text-white w-full bg-transparent border-b-2 border-white"
                                         placeholder="Password"
                                     />
-                                    <span class="text-white">{{ errors[0] }}</span>
+                                    <span class="text-white">{{
+                                        errors[0]
+                                    }}</span>
                                 </ValidationProvider>
                             </div>
 
@@ -111,7 +116,8 @@ export default {
                 username: "",
                 password: "",
                 password_confirmation: ""
-            }
+            },
+            errors: ""
         };
     },
     methods: {
@@ -121,16 +127,18 @@ export default {
                 console.log("Picture loaded.");
                 this.image = image;
             } else {
-                console.log(
-                    "FileReader API not supported"
-                );
+                console.log("FileReader API not supported");
             }
         },
         submit() {
-            console.log(this.form);
-            axios.post("/register", this.form).then(res => {
-                location.reload();
-            });
+            axios
+                .post("/register", this.form)
+                .then(res => {
+                    location.reload();
+                })
+                .catch(errors => {
+                    this.errors = errors.response.data.errors;
+                });
         }
     }
 };

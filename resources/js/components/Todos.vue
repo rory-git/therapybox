@@ -22,7 +22,7 @@
                                     v-model="todos[index].title"
                                     class="text-white w-full bg-transparent border-b-2 border-white"
                                     :class="
-                                        todos[index].complete ? 'line-through' : null
+                                        todo.complete ? 'line-through' : null
                                     "
                                 />
                                 <span>{{ errors[0] }}</span>
@@ -66,7 +66,7 @@ export default {
         this.user = user;
     },
     created() {
-        this.submit = _.debounce(this.submit, 300);
+        this.submit = _.debounce(this.submit, 900);
     },
     methods: {
         submit(index) {
@@ -74,9 +74,12 @@ export default {
                 let loader = this.$loading.show();
 
                 axios
-                    .put(`/api/todo/${this.todos[index].id}`, this.todos[index])
+                    .put(`/api/todo/${this.todos[index].id}`, {
+                        todo: this.todos[index]
+                    })
                     .then(res => {
-                        this.todos[index] = res.data;
+                        // this.todos[index] = res.data;
+                        this.todos = res.data;
                         loader.hide();
                     });
             }
@@ -85,7 +88,9 @@ export default {
             let loader = this.$loading.show();
 
             axios
-                .delete(`/api/todo/${this.todos[index].id}`, this.todos[index])
+                .post(`/api/todo/${this.todos[index].id}/delete`, {
+                    user_id: this.user.id
+                })
                 .then(res => {
                     this.todos = res.data;
                     loader.hide();

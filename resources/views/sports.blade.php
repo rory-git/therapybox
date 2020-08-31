@@ -2,10 +2,9 @@
 
 @section('content')
 <div class="container">
-    <photos :photos="{{Auth::user()->photos ? Auth::user()->photos : '[]'}}" />
+<sports />
 </div>
 @endsection
 
 <script>
-
 </script>
