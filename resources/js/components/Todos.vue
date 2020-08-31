@@ -22,7 +22,7 @@
                                     v-model="todos[index].title"
                                     class="text-white w-full bg-transparent border-b-2 border-white"
                                     :class="
-                                        todo.complete ? 'line-through' : null
+                                        todos[index].complete ? 'line-through' : null
                                     "
                                 />
                                 <span>{{ errors[0] }}</span>

@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/sports', 'MatchController@show');
+
 
 Route::put('/todo/{id}', 'TodoController@update');
 Route::delete('/todo/{id}', 'TodoController@destroy');

@@ -90627,7 +90627,7 @@ var render = function() {
                                               ],
                                               staticClass:
                                                 "text-white w-full bg-transparent border-b-2 border-white",
-                                              class: todo.complete
+                                              class: _vm.todos[index].complete
                                                 ? "line-through"
                                                 : null,
                                               attrs: { type: "text" },
@@ -90916,7 +90916,12 @@ var staticRenderFns = [
         _c("h3", [_vm._v("Weather")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "body" })
+      _c("div", { staticClass: "body" }, [
+        _c("img", {
+          staticClass: "m-auto",
+          attrs: { src: "/img/Clouds_icon.png", alt: "" }
+        })
+      ])
     ])
   }
 ]

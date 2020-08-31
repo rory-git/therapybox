@@ -4,7 +4,7 @@
             <h3>Weather</h3>
         </div>
         <div class="body">
-          
+          <img src="/img/Clouds_icon.png" class="m-auto" alt="">
         </div>
     </div>
 </template>
