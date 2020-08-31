@@ -22,6 +22,8 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://cors-anywhere.herokuapp.com/';
+axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

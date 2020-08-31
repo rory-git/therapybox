@@ -48,7 +48,7 @@ class User extends Authenticatable implements HasMedia
     public function registerMediaCollections(): void
     {
         $this
-            ->addMediaCollection('avatars')
+            ->addMediaCollection('avatar')
            ->singleFile();
     }
 

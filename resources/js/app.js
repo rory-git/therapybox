@@ -38,6 +38,14 @@ extend("password", {
 });
 
 
+import VueGeolocation from 'vue-browser-geolocation';
+Vue.use(VueGeolocation);
+
+import VueGeolocationApi from 'vue-geolocation-api'
+ 
+Vue.use(VueGeolocationApi)
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

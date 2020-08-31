@@ -24,8 +24,12 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "chart.js": "^2.9.3",
+        "rss-parser": "^3.9.0",
         "simple-vue-image-input": "^1.0.0",
         "tailwindcss": "^1.7.6",
-        "vee-validate": "^3.3.9"
+        "vee-validate": "^3.3.9",
+        "vue-browser-geolocation": "^1.8.0",
+        "vue-geolocation-api": "^0.1.17"
     }
 }

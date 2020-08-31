@@ -129,7 +129,7 @@ export default {
         submit() {
             console.log(this.form);
             axios.post("/register", this.form).then(res => {
-                console.log(res.data);
+                location.reload();
             });
         }
     }
