@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::put('/todo/{id}', 'TodoController@update');
+
+Route::post('/photos/{userid}', 'PhotosController@create');
+Route::delete('/photos/{userid}', 'PhotosController@destroy');

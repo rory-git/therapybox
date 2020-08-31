@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+Route::get('/null', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/photos', 'PhotosController@index');
+Route::get('/tasks', 'TodoController@index');
 

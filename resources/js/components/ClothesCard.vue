@@ -29,7 +29,7 @@ export default {
                 labels: this.labels,
                 datasets: [
                     {
-                        label: "Population (millions)",
+                        label: "",
                         backgroundColor: [
                             "#3e95cd",
                             "#8e5ea2",
@@ -45,7 +45,7 @@ export default {
             options: {
                 title: {
                     display: false,
-                    text: "Predicted world population (millions) in 2050"
+                    text: ""
                 }
             }
         });

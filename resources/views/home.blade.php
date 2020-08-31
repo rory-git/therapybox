@@ -9,4 +9,6 @@
 <script>
     window.clothes = @json($clothes);
     window.clothesValues = @json($clothesValues);
+    window.todos = @json(Auth::user()->todos->take(3));
+    window.photos= @json(Auth::user()->photos);
 </script>

@@ -122,7 +122,7 @@ export default {
                 this.image = image;
             } else {
                 console.log(
-                    "FileReader API not supported: use the <form>, Luke!"
+                    "FileReader API not supported"
                 );
             }
         },

@@ -45,22 +45,43 @@ class User extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
+    public function todos()
+    {
+        return $this->hasMany('App\Todo');
+    }
+
     public function registerMediaCollections(): void
     {
         $this
             ->addMediaCollection('avatar')
-           ->singleFile();
+            ->singleFile();
+
+        $this
+            ->addMediaCollection('photos')
+            ->onlyKeepLatest(6);
     }
 
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-              ->width(280)
-              ->height(280)
-              ->sharpen(0);
+            ->width(280)
+            ->height(280);
     }
 
-    public function getAvatarAttribute() {
-        return $this->getFirstMedia('avatar')->getUrl('thumb');
+    public function getAvatarAttribute()
+    {
+        if ($this->getFirstMedia('avatar')) {
+            return $this->getFirstMedia('avatar')->getUrl('thumb');
+        }
+        return asset('img/default_user.png');
+    }
+
+    public function getPhotosAttribute()
+    {
+        if ($this->getFirstMedia('photos')) {
+            return $this->getMedia('photos')->map(function($i){
+                return $i->getUrl('thumb');
+            });
+        }
     }
 }

@@ -10,9 +10,9 @@
             </div>
         </div>
         <div>
-            <div class="card-grid grid grid-cols-3 gap-4">
+            <div class="card-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <weather-card />
-                
+
                 <div class="card">
                     <div class="header bg-yellow-400 text-center p-4">
                         <h3>Sport</h3>
@@ -22,16 +22,25 @@
                 <news-card />
                 <div class="card">
                     <div class="header bg-yellow-400 text-center p-4">
-                        <h3>Photos</h3>
+                        <a href="/photos" class="hover:underline"><h3>Photos</h3></a>
                     </div>
-                    <div class="body"></div>
-                </div>
-                <div class="card">
-                    <div class="header bg-yellow-400 text-center p-4">
-                        <h3>Tasks</h3>
+                    <div class="body">
+                        <div class="grid grid-cols-3 gap-4">
+                            <div
+                                v-for="(image, index) in photos"
+                                :key="index"
+                                class="relative"
+                            >
+                                <img
+                                    class="w-full object-cover"
+                                    :src="image"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div class="body"></div>
                 </div>
+                <todos-card />
                 <clothes-card />
             </div>
         </div>
@@ -42,17 +51,18 @@
 export default {
     data() {
         return {
-            user: ""
+            user: "",
+            photos:""
         };
     },
     mounted() {
         this.user = user;
-    },
-  
+        this.photos = photos
+    }
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .avatar {
     height: 100px;
     width: 100px;
@@ -71,9 +81,9 @@ export default {
     overflow: hidden;
 
     .body {
-      padding:15px;
-      text-align:center;
-      margin: 0 auto;
+        padding: 15px;
+        text-align: center;
+        margin: 0 auto;
     }
 }
 </style>
