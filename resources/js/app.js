@@ -8,6 +8,36 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import ImageInput from 'simple-vue-image-input'
+
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('image-input', ImageInput);
+
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
+import { required, email } from "vee-validate/dist/rules";
+
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
+extend("email", {
+    ...email,
+    message: "This is not a valid email address",
+});
+
+extend("required", {
+    ...required,
+    message: "This field is required",
+});
+
+extend("password", {
+    params: ["target"],
+    validate(value, { target }) {
+        return value === target;
+    },
+    message: "Password confirmation does not match",
+});
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,7 +49,6 @@ window.Vue = require('vue');
 const files = require.context('./', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

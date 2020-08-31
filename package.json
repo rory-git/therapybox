@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "tailwindcss": "^1.7.6"
+        "simple-vue-image-input": "^1.0.0",
+        "tailwindcss": "^1.7.6",
+        "vee-validate": "^3.3.9"
     }
 }

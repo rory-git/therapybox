@@ -6158,6 +6158,11 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
+simple-vue-image-input@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/simple-vue-image-input/-/simple-vue-image-input-1.0.0.tgz#21a38f93d2583b0cdfa5258f02e5a75d877f859c"
+  integrity sha512-hD9BG+yA7Svs/ZmbatuTEQuMRbQIa5IdO3isF98oejMkJuVbzVk3UQU2ESCUFI1xZIcoIS4DfWF673rWYOx6Hw==
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -6868,6 +6873,11 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+vee-validate@^3.3.9:
+  version "3.3.9"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-3.3.9.tgz#73db22eb28bea913b6a93b90369bb4cbf5e67d45"
+  integrity sha512-0ibP+8dNU8XitkhcB5UBnVlHdPlUqFx6jGg4vNUN/lw5geVKBvgyo83y7YCvYA5iqQPgCnuQxsx8kTHa0d/Zyw==
 
 vendors@^1.0.0:
   version "1.0.4"

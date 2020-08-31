@@ -14,7 +14,7 @@
                     <div class="md:w-1/2 px-24">
                         <div class="col-md-6">
                             <input id="username" type="text"
-                                class="w-full bg-transparent border-b-2 border-white @error('username') is-invalid @enderror"
+                                class="text-white w-full bg-transparent border-b-2 border-white @error('username') is-invalid @enderror"
                                 name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username">
     
                             @error('username')
@@ -29,7 +29,7 @@
     
                         <div class="col-md-6">
                             <input id="password" type="password"
-                                class="w-full bg-transparent border-b-2 border-white @error('password') is-invalid @enderror"
+                                class="text-white w-full bg-transparent border-b-2 border-white @error('password') is-invalid @enderror"
                                 name="password" required autocomplete="current-password" placeholder="Password">
     
                             @error('password')
