@@ -38,12 +38,12 @@ extend("password", {
 });
 
 
-import VueGeolocation from 'vue-browser-geolocation';
-Vue.use(VueGeolocation);
-
-import VueGeolocationApi from 'vue-geolocation-api'
- 
-Vue.use(VueGeolocationApi)
+// Import component
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+// Init plugin
+Vue.use(Loading);
 
 
 /**

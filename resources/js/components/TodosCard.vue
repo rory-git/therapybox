@@ -26,9 +26,12 @@ export default {
     },
     methods: {
         submit(index) {
+            let loader = this.$loading.show();
+
             axios.put(`/api/todo/${this.todos[index].id}`, this.todos[index])
             .then(res => {
                 this.todos[index] = res.data;
+                loader.hide();
             })
         }
     }

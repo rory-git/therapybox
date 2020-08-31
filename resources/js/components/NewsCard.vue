@@ -12,6 +12,9 @@
                 </a>
             </div>
         </div>
+        <div v-else class="body">
+            Loading ...
+        </div>
     </div>
 </template>
 

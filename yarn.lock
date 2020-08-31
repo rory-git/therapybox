@@ -6932,6 +6932,11 @@ vue-browser-geolocation@^1.8.0:
   dependencies:
     vue "^2.0.1"
 
+vue-debounce@^2.5.7:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/vue-debounce/-/vue-debounce-2.5.7.tgz#4e2aee484ea46be343242639ea56ddcd96ab3431"
+  integrity sha512-weyMz0ee6xHLCJ+HrvfkVUQqBsH7Jx359yLTmfnmpb8fDUD3HZEwd2ZHoq+sZjcYR7JcW7B9FlqjJA2IJXqscg==
+
 vue-geolocation-api@^0.1.17:
   version "0.1.17"
   resolved "https://registry.yarnpkg.com/vue-geolocation-api/-/vue-geolocation-api-0.1.17.tgz#fb1687a353d7fbb957243b7d9fee3e0dfd495e02"
@@ -6954,6 +6959,11 @@ vue-loader@^15.4.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-loading-overlay@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/vue-loading-overlay/-/vue-loading-overlay-3.4.0.tgz#35d10d1f3404a2c7450a708dd4554ada23905657"
+  integrity sha512-c7j9HUXMb7vTV17yytS4271LNkCEpbr+i68wDBE9Ic60HFTVCz7U0/KRw1J9jsW+Ym+2R2ldKozAwOhCKCI4uQ==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"

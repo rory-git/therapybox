@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <img :src="user.avatar" height="100" class="avatar rounded-full" />
+            <!-- <img :src="user.avatar" height="100" class="avatar rounded-full" /> -->
             <div class="">
                 <h1 class="text-white text-center">
                     Good Day

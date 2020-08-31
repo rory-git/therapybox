@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::put('/todo/{id}', 'TodoController@update');
+Route::delete('/todo/{id}', 'TodoController@destroy');
+Route::post('/todo/create', 'TodoController@store');
 
 Route::post('/photos/{userid}', 'PhotosController@create');
 Route::delete('/photos/{userid}', 'PhotosController@destroy');

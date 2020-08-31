@@ -30,6 +30,8 @@
         "tailwindcss": "^1.7.6",
         "vee-validate": "^3.3.9",
         "vue-browser-geolocation": "^1.8.0",
-        "vue-geolocation-api": "^0.1.17"
+        "vue-debounce": "^2.5.7",
+        "vue-geolocation-api": "^0.1.17",
+        "vue-loading-overlay": "^3.4.0"
     }
 }

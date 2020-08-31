@@ -16,10 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/null', 'HomeController@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/null', function(){
+    return redirect(url(''));
+});
+
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 Route::get('/photos', 'PhotosController@index');
 Route::get('/tasks', 'TodoController@index');
 

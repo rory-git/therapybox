@@ -23,16 +23,22 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm bg-yellow-400 py-4 ">
             <div class="container">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="flex justify-between items-center">
+
+                <a href="{{url('')}}"><img src="{{Auth::user()->avatar}}" alt="" class="h-16 rounded-full w-16"></a>
+                
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto flex ">
+                        <li class="nav-item mr-3">
+                            <a class="nav-link" href="{{ url('') }}">{{ __('Home') }}</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
+                            <li class="nav-item mr-3">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
@@ -41,7 +47,7 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown mr-3">
                                 <div  class="flex">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

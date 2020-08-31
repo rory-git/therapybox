@@ -2086,6 +2086,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var Parser = __webpack_require__(/*! rss-parser */ "./node_modules/rss-parser/index.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2356,7 +2359,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      todos: "",
+      showForm: false,
+      user: ""
+    };
+  },
+  mounted: function mounted() {
+    this.todos = todos;
+    this.user = user;
+  },
+  created: function created() {
+    this.submit = _.debounce(this.submit, 300);
+  },
+  methods: {
+    submit: function submit(index) {
+      var _this = this;
+
+      if (this.todos[index].title.length) {
+        var loader = this.$loading.show();
+        axios.put("/api/todo/".concat(this.todos[index].id), this.todos[index]).then(function (res) {
+          _this.todos[index] = res.data;
+          loader.hide();
+        });
+      }
+    },
+    removeTodo: function removeTodo(index) {
+      var _this2 = this;
+
+      var loader = this.$loading.show();
+      axios["delete"]("/api/todo/".concat(this.todos[index].id), this.todos[index]).then(function (res) {
+        _this2.todos = res.data;
+        loader.hide();
+      })["catch"](function (e) {
+        loader.hide();
+      });
+    },
+    addTodo: function addTodo() {
+      var _this3 = this;
+
+      var loader = this.$loading.show();
+      axios.post("/api/todo/create", {
+        user_id: this.user.id
+      }).then(function (res) {
+        _this3.todos = res.data;
+        loader.hide();
+      })["catch"](function (e) {
+        loader.hide();
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -2398,8 +2498,10 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit(index) {
       var _this = this;
 
+      var loader = this.$loading.show();
       axios.put("/api/todo/".concat(this.todos[index].id), this.todos[index]).then(function (res) {
         _this.todos[index] = res.data;
+        loader.hide();
       });
     }
   }
@@ -2427,17 +2529,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    this.geoFindMe();
-  },
-  methods: {
-    geoFindMe: function geoFindMe() {}
-  }
+  mounted: function mounted() {},
+  methods: {}
 });
 
 /***/ }),
@@ -25215,6 +25309,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".todo.complete p {\n  text-decoration: line-through;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loading-overlay/dist/vue-loading.css":
+/*!***********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loading-overlay/dist/vue-loading.css ***!
+  \***********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".vld-shown {\n  overflow: hidden;\n}\n\n.vld-overlay {\n  bottom: 0;\n  left: 0;\n  position: absolute;\n  right: 0;\n  top: 0;\n  align-items: center;\n  display: none;\n  justify-content: center;\n  overflow: hidden;\n  z-index: 9999;\n}\n\n.vld-overlay.is-active {\n  display: flex;\n}\n\n.vld-overlay.is-full-page {\n  z-index: 9999;\n  position: fixed;\n}\n\n.vld-overlay .vld-background {\n  bottom: 0;\n  left: 0;\n  position: absolute;\n  right: 0;\n  top: 0;\n  background: #fff;\n  opacity: 0.5;\n}\n\n.vld-overlay .vld-icon, .vld-parent {\n  position: relative;\n}\n\n", ""]);
 
 // exports
 
@@ -89571,191 +89684,6 @@ var version = '3.3.9';
 
 /***/ }),
 
-/***/ "./node_modules/vue-browser-geolocation/dist/vue-geolocation.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/vue-browser-geolocation/dist/vue-geolocation.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-!function(o,t){ true?module.exports=t():undefined}(this,function(){return function(o){function t(n){if(e[n])return e[n].exports;var r=e[n]={i:n,l:!1,exports:{}};return o[n].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var e={};return t.m=o,t.c=e,t.i=function(o){return o},t.d=function(o,e,n){t.o(o,e)||Object.defineProperty(o,e,{configurable:!1,enumerable:!0,get:n})},t.n=function(o){var e=o&&o.__esModule?function(){return o.default}:function(){return o};return t.d(e,"a",e),e},t.o=function(o,t){return Object.prototype.hasOwnProperty.call(o,t)},t.p="",t(t.s=0)}([function(o,t,e){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n={install:function(o){o.prototype.$getLocation=n.getLocation,o.prototype.$watchLocation=n.watchLocation,o.prototype.$clearLocationWatch=n.clearLocation},getLocation:function(){var o=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=arguments.length>1&&void 0!==arguments[1]&&arguments[1];return new Promise(function(e,r){if(t)return void r("reject forced for testing purposes");n._isAvailable()?window.navigator.geolocation.getCurrentPosition(function(o){e({lat:o.coords.latitude,lng:o.coords.longitude,altitude:o.coords.altitude,altitudeAccuracy:o.coords.altitudeAccuracy,accuracy:o.coords.accuracy})},function(){r("no position access")},o):r("no browser support")})},watchLocation:function(){var o=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=arguments.length>1&&void 0!==arguments[1]&&arguments[1];return new Promise(function(e,r){if(t)return void r("reject forced for testing purposes");n._isAvailable()?window.navigator.geolocation.watchPosition(function(o){e({lat:o.coords.latitude,lng:o.coords.longitude,altitude:o.coords.altitude,altitudeAccuracy:o.coords.altitudeAccuracy,accuracy:o.coords.accuracy,heading:o.coords.heading,speed:o.coords.speed})},function(){r("no position access")},o):r("no browser support")})},clearLocation:function(o){return new Promise(function(t,e){n._isAvailable()?o?t(window.navigator.geolocation.clearWatch(o)):e("please provide watchID"):e("no browser support")})},_isAvailable:function(){return"geolocation"in window.navigator}};t.default=n,"undefined"!=typeof window&&window.Vue&&window.Vue.use(n)}])});
-
-/***/ }),
-
-/***/ "./node_modules/vue-geolocation-api/dist/vue-geolocation-api.esm.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/vue-geolocation-api/dist/vue-geolocation-api.esm.js ***!
-  \**************************************************************************/
-/*! exports provided: default, install */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
-const getCurrentPosition = options => new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject, options));
-const positionToObject = ({
-  coords,
-  timestamp
-}) => ({
-  coords: {
-    latitude: coords.latitude,
-    longitude: coords.longitude,
-    altitude: coords.altitude,
-    accuracy: coords.accuracy,
-    altitudeAccuracy: coords.altitudeAccuracy,
-    heading: coords.heading,
-    speed: coords.speed
-  },
-  timestamp
-});
-
-const VueGeolocationApi = (Vue, defaultOptions = {}) => Vue.extend({
-  data: () => Object.assign({
-    options: {},
-    watch: false
-  }, defaultOptions, {
-    _watcher: null,
-    position: null,
-    loading: false,
-    supported: null
-  }),
-  computed: {
-    coords() {
-      const {
-        position
-      } = this;
-      return position ? position.coords : null;
-    },
-
-    timestamp() {
-      const {
-        position
-      } = this;
-      return position ? position.timestamp : null;
-    },
-
-    geoJSON() {
-      const {
-        coords
-      } = this;
-      if (!coords) return null;
-      const {
-        latitude,
-        longitude,
-        altitude
-      } = coords;
-      const coordinates = [latitude, longitude];
-      return altitude === null ? coordinates : [...coordinates, altitude];
-    }
-
-  },
-  watch: {
-    watch: '_watch',
-    options: {
-      deep: true,
-      handler: '_watch'
-    }
-  },
-
-  beforeDestroy() {
-    this.clearTimer();
-  },
-
-  created() {
-    if (typeof window === 'undefined') return;
-    this.checkSupport();
-
-    this._watch();
-  },
-
-  methods: {
-    checkSupport() {
-      const supported = typeof window !== 'undefined' && navigator && 'geolocation' in navigator;
-      return this.supported = supported;
-    },
-
-    async getCurrentPosition(options) {
-      if (!this.checkSupport()) return;
-      const params = Object.assign({}, this.options, options || {});
-      this.loading = true;
-      const response = await getCurrentPosition(params);
-      return this._setCurrentPosition(response);
-    },
-
-    setOption(key, value) {
-      this.options = Object.assign({}, this.options, {
-        [key]: value
-      });
-    },
-
-    _setCurrentPosition(position) {
-      if (!position) {
-        this.position = null;
-      }
-
-      this.loading = false;
-      this.$emit('changed:position', position);
-      return this.position = positionToObject(position);
-    },
-
-    _watch() {
-      if (!this.watch) return this._clearWatch();
-
-      this._watchPosition();
-    },
-
-    _clearWatch() {
-      if (!this._watcher) return;
-      navigator.geolocation.clearWatch(this._watcher);
-      this._watcher = null;
-    },
-
-    _watchPosition(_success, _error, options) {
-      if (!this.checkSupport()) return;
-
-      this._clearWatch();
-
-      this.loading = true;
-      this._watcher = navigator.geolocation.watchPosition(_success || (position => this._setCurrentPosition(position)), _error || (positionError => console.error(positionError)), options);
-    }
-
-  }
-});
-
-function install(Vue, options) {
-  if (install.installed) return;
-  const Component = VueGeolocationApi(Vue, options);
-  const geolocation = new Component();
-  install.installed = true;
-  Vue.prototype.$geolocation = geolocation;
-}
-const plugin = {
-  install
-};
-let GlobalVue = null;
-
-if (typeof window !== 'undefined') {
-  GlobalVue = window.Vue;
-} else if (typeof global !== 'undefined') {
-  GlobalVue = global.Vue;
-}
-
-if (GlobalVue) {
-  GlobalVue.use(plugin);
-}
-
-var wrapper = {
-  install,
-  VueGeolocationApi
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (wrapper);
-
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/index.js?!./node_modules/simple-vue-image-input/ImageInput.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib??vue-loader-options!./node_modules/simple-vue-image-input/ImageInput.vue?vue&type=script&lang=js& ***!
@@ -90029,11 +89957,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", [
-      _c("img", {
-        staticClass: "avatar rounded-full",
-        attrs: { src: _vm.user.avatar, height: "100" }
-      }),
-      _vm._v(" "),
       _c("div", {}, [
         _c("h1", { staticClass: "text-white text-center" }, [
           _vm._v("\n                Good Day\n                "),
@@ -90156,7 +90079,9 @@ var render = function() {
             )
           ])
         ])
-      : _vm._e()
+      : _c("div", { staticClass: "body" }, [
+          _vm._v("\n        Loading ...\n    ")
+        ])
   ])
 }
 var staticRenderFns = [
@@ -90640,20 +90565,215 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", { staticClass: "text-center text-white" }, [_vm._v("Tasks")]),
+  return _c(
+    "div",
+    [
+      _c("h1", { staticClass: "text-center text-white mb-10" }, [
+        _vm._v("Tasks")
+      ]),
       _vm._v(" "),
-      _c("div")
-    ])
-  }
-]
+      _c("ValidationObserver", {
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(ref) {
+              var handleSubmit = ref.handleSubmit
+              return [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return handleSubmit(_vm.submit)
+                      }
+                    }
+                  },
+                  _vm._l(_vm.todos, function(todo, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "todo py-5",
+                        class: todo.complete ? "complete" : null
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "flex items-center justify-between" },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "w-3/4" },
+                              [
+                                _c("ValidationProvider", {
+                                  attrs: { name: "confirm", rules: "required" },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "default",
+                                        fn: function(ref) {
+                                          var errors = ref.errors
+                                          return [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.todos[index].title,
+                                                  expression:
+                                                    "todos[index].title"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "text-white w-full bg-transparent border-b-2 border-white",
+                                              class: todo.complete
+                                                ? "line-through"
+                                                : null,
+                                              attrs: { type: "text" },
+                                              domProps: {
+                                                value: _vm.todos[index].title
+                                              },
+                                              on: {
+                                                keyup: function($event) {
+                                                  return _vm.submit(index)
+                                                },
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.todos[index],
+                                                    "title",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("span", [
+                                              _vm._v(_vm._s(errors[0]))
+                                            ])
+                                          ]
+                                        }
+                                      }
+                                    ],
+                                    null,
+                                    true
+                                  )
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "cursor-pointer",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.removeTodo(index)
+                                  }
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "w-5",
+                                  attrs: { src: "/img/bin.svg", alt: "" }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.todos[index].complete,
+                                  expression: "todos[index].complete"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(
+                                  _vm.todos[index].complete
+                                )
+                                  ? _vm._i(_vm.todos[index].complete, null) > -1
+                                  : _vm.todos[index].complete
+                              },
+                              on: {
+                                change: [
+                                  function($event) {
+                                    var $$a = _vm.todos[index].complete,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            _vm.todos[index],
+                                            "complete",
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            _vm.todos[index],
+                                            "complete",
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(
+                                        _vm.todos[index],
+                                        "complete",
+                                        $$c
+                                      )
+                                    }
+                                  },
+                                  function($event) {
+                                    return _vm.submit(index)
+                                  }
+                                ]
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            }
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "bg-yellow-400 px-20 py-3 rounded-full",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.addTodo()
+              }
+            }
+          },
+          [_vm._v("\n            + Add\n        ")]
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -90784,25 +90904,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "body" }),
-    _vm._v(" "),
-    _vm.$geolocation.loading
-      ? _c("span", [_vm._v("Loading location...")])
-      : !_vm.$geolocation.supported
-      ? _c("span", [_vm._v("Geolocation API is not supported")])
-      : _vm._e()
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "header bg-yellow-400 text-center p-4" }, [
-      _c("h3", [_vm._v("Weather")])
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "header bg-yellow-400 text-center p-4" }, [
+        _c("h3", [_vm._v("Weather")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "body" })
     ])
   }
 ]
@@ -90921,6 +91035,47 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/vue-loading-overlay/dist/vue-loading.css":
+/*!***************************************************************!*\
+  !*** ./node_modules/vue-loading-overlay/dist/vue-loading.css ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./vue-loading.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loading-overlay/dist/vue-loading.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vue-loading-overlay/dist/vue-loading.min.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,e){ true?module.exports=e():undefined}("undefined"!=typeof self?self:this,(function(){return function(t){var e={};function i(n){if(e[n])return e[n].exports;var r=e[n]={i:n,l:!1,exports:{}};return t[n].call(r.exports,r,r.exports,i),r.l=!0,r.exports}return i.m=t,i.c=e,i.d=function(t,e,n){i.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},i.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},i.t=function(t,e){if(1&e&&(t=i(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var r in t)i.d(n,r,function(e){return t[e]}.bind(null,r));return n},i.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return i.d(e,"a",e),e},i.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},i.p="",i(i.s=1)}([function(t,e,i){},function(t,e,i){"use strict";i.r(e);var n="undefined"!=typeof window?window.HTMLElement:Object,r={mounted:function(){this.enforceFocus&&document.addEventListener("focusin",this.focusIn)},methods:{focusIn:function(t){if(this.isActive&&t.target!==this.$el&&!this.$el.contains(t.target)){var e=this.container?this.container:this.isFullPage?null:this.$el.parentElement;(this.isFullPage||e&&e.contains(t.target))&&(t.preventDefault(),this.$el.focus())}}},beforeDestroy:function(){document.removeEventListener("focusin",this.focusIn)}};function a(t,e,i,n,r,a,o,s){var l,u="function"==typeof t?t.options:t;if(e&&(u.render=e,u.staticRenderFns=i,u._compiled=!0),n&&(u.functional=!0),a&&(u._scopeId="data-v-"+a),o?(l=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),r&&r.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(o)},u._ssrRegister=l):r&&(l=s?function(){r.call(this,(u.functional?this.parent:this).$root.$options.shadowRoot)}:r),l)if(u.functional){u._injectStyles=l;var c=u.render;u.render=function(t,e){return l.call(e),c(t,e)}}else{var d=u.beforeCreate;u.beforeCreate=d?[].concat(d,l):[l]}return{exports:t,options:u}}var o=a({name:"spinner",props:{color:{type:String,default:"#000"},height:{type:Number,default:64},width:{type:Number,default:64}}},(function(){var t=this.$createElement,e=this._self._c||t;return e("svg",{attrs:{viewBox:"0 0 38 38",xmlns:"http://www.w3.org/2000/svg",width:this.width,height:this.height,stroke:this.color}},[e("g",{attrs:{fill:"none","fill-rule":"evenodd"}},[e("g",{attrs:{transform:"translate(1 1)","stroke-width":"2"}},[e("circle",{attrs:{"stroke-opacity":".25",cx:"18",cy:"18",r:"18"}}),e("path",{attrs:{d:"M36 18c0-9.94-8.06-18-18-18"}},[e("animateTransform",{attrs:{attributeName:"transform",type:"rotate",from:"0 18 18",to:"360 18 18",dur:"0.8s",repeatCount:"indefinite"}})],1)])])])}),[],!1,null,null,null).exports,s=a({name:"dots",props:{color:{type:String,default:"#000"},height:{type:Number,default:240},width:{type:Number,default:60}}},(function(){var t=this.$createElement,e=this._self._c||t;return e("svg",{attrs:{viewBox:"0 0 120 30",xmlns:"http://www.w3.org/2000/svg",fill:this.color,width:this.width,height:this.height}},[e("circle",{attrs:{cx:"15",cy:"15",r:"15"}},[e("animate",{attrs:{attributeName:"r",from:"15",to:"15",begin:"0s",dur:"0.8s",values:"15;9;15",calcMode:"linear",repeatCount:"indefinite"}}),e("animate",{attrs:{attributeName:"fill-opacity",from:"1",to:"1",begin:"0s",dur:"0.8s",values:"1;.5;1",calcMode:"linear",repeatCount:"indefinite"}})]),e("circle",{attrs:{cx:"60",cy:"15",r:"9","fill-opacity":"0.3"}},[e("animate",{attrs:{attributeName:"r",from:"9",to:"9",begin:"0s",dur:"0.8s",values:"9;15;9",calcMode:"linear",repeatCount:"indefinite"}}),e("animate",{attrs:{attributeName:"fill-opacity",from:"0.5",to:"0.5",begin:"0s",dur:"0.8s",values:".5;1;.5",calcMode:"linear",repeatCount:"indefinite"}})]),e("circle",{attrs:{cx:"105",cy:"15",r:"15"}},[e("animate",{attrs:{attributeName:"r",from:"15",to:"15",begin:"0s",dur:"0.8s",values:"15;9;15",calcMode:"linear",repeatCount:"indefinite"}}),e("animate",{attrs:{attributeName:"fill-opacity",from:"1",to:"1",begin:"0s",dur:"0.8s",values:"1;.5;1",calcMode:"linear",repeatCount:"indefinite"}})])])}),[],!1,null,null,null).exports,l=a({name:"bars",props:{color:{type:String,default:"#000"},height:{type:Number,default:40},width:{type:Number,default:40}}},(function(){var t=this.$createElement,e=this._self._c||t;return e("svg",{attrs:{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30",height:this.height,width:this.width,fill:this.color}},[e("rect",{attrs:{x:"0",y:"13",width:"4",height:"5"}},[e("animate",{attrs:{attributeName:"height",attributeType:"XML",values:"5;21;5",begin:"0s",dur:"0.6s",repeatCount:"indefinite"}}),e("animate",{attrs:{attributeName:"y",attributeType:"XML",values:"13; 5; 13",begin:"0s",dur:"0.6s",repeatCount:"indefinite"}})]),e("rect",{attrs:{x:"10",y:"13",width:"4",height:"5"}},[e("animate",{attrs:{attributeName:"height",attributeType:"XML",values:"5;21;5",begin:"0.15s",dur:"0.6s",repeatCount:"indefinite"}}),e("animate",{attrs:{attributeName:"y",attributeType:"XML",values:"13; 5; 13",begin:"0.15s",dur:"0.6s",repeatCount:"indefinite"}})]),e("rect",{attrs:{x:"20",y:"13",width:"4",height:"5"}},[e("animate",{attrs:{attributeName:"height",attributeType:"XML",values:"5;21;5",begin:"0.3s",dur:"0.6s",repeatCount:"indefinite"}}),e("animate",{attrs:{attributeName:"y",attributeType:"XML",values:"13; 5; 13",begin:"0.3s",dur:"0.6s",repeatCount:"indefinite"}})])])}),[],!1,null,null,null).exports,u=a({name:"vue-loading",mixins:[r],props:{active:Boolean,programmatic:Boolean,container:[Object,Function,n],isFullPage:{type:Boolean,default:!0},enforceFocus:{type:Boolean,default:!0},lockScroll:{type:Boolean,default:!1},transition:{type:String,default:"fade"},canCancel:Boolean,onCancel:{type:Function,default:function(){}},color:String,backgroundColor:String,blur:{type:String,default:"2px"},opacity:Number,width:Number,height:Number,zIndex:Number,loader:{type:String,default:"spinner"}},data:function(){return{isActive:this.active}},components:{Spinner:o,Dots:s,Bars:l},beforeMount:function(){this.programmatic&&(this.container?(this.isFullPage=!1,this.container.appendChild(this.$el)):document.body.appendChild(this.$el))},mounted:function(){this.programmatic&&(this.isActive=!0),document.addEventListener("keyup",this.keyPress)},methods:{cancel:function(){this.canCancel&&this.isActive&&(this.hide(),this.onCancel.apply(null,arguments))},hide:function(){var t=this;this.$emit("hide"),this.$emit("update:active",!1),this.programmatic&&(this.isActive=!1,setTimeout((function(){var e;t.$destroy(),void 0!==(e=t.$el).remove?e.remove():e.parentNode.removeChild(e)}),150))},disableScroll:function(){this.isFullPage&&this.lockScroll&&document.body.classList.add("vld-shown")},enableScroll:function(){this.isFullPage&&this.lockScroll&&document.body.classList.remove("vld-shown")},keyPress:function(t){27===t.keyCode&&this.cancel()}},watch:{active:function(t){this.isActive=t},isActive:function(t){t?this.disableScroll():this.enableScroll()}},computed:{bgStyle:function(){return{background:this.backgroundColor,opacity:this.opacity,backdropFilter:"blur(".concat(this.blur,")")}}},beforeDestroy:function(){document.removeEventListener("keyup",this.keyPress)}},(function(){var t=this,e=t.$createElement,i=t._self._c||e;return i("transition",{attrs:{name:t.transition}},[i("div",{directives:[{name:"show",rawName:"v-show",value:t.isActive,expression:"isActive"}],staticClass:"vld-overlay is-active",class:{"is-full-page":t.isFullPage},style:{zIndex:t.zIndex},attrs:{tabindex:"0","aria-busy":t.isActive,"aria-label":"Loading"}},[i("div",{staticClass:"vld-background",style:t.bgStyle,on:{click:function(e){return e.preventDefault(),t.cancel(e)}}}),i("div",{staticClass:"vld-icon"},[t._t("before"),t._t("default",[i(t.loader,{tag:"component",attrs:{color:t.color,width:t.width,height:t.height}})]),t._t("after")],2)])])}),[],!1,null,null,null).exports,c=function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},i=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};return{show:function(){var n=arguments.length>0&&void 0!==arguments[0]?arguments[0]:e,r=arguments.length>1&&void 0!==arguments[1]?arguments[1]:i,a={programmatic:!0},o=Object.assign({},e,n,a),s=new(t.extend(u))({el:document.createElement("div"),propsData:o}),l=Object.assign({},i,r);return Object.keys(l).map((function(t){s.$slots[t]=l[t]})),s}}};i(0);u.install=function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},i=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},n=c(t,e,i);t.$loading=n,t.prototype.$loading=n};e.default=u}]).default}));
 
 /***/ }),
 
@@ -108216,9 +108371,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var simple_vue_image_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! simple-vue-image-input */ "./node_modules/simple-vue-image-input/ImageInput.vue");
 /* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
 /* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-browser-geolocation */ "./node_modules/vue-browser-geolocation/dist/vue-geolocation.js");
-/* harmony import */ var vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vue_geolocation_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-geolocation-api */ "./node_modules/vue-geolocation-api/dist/vue-geolocation-api.esm.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_4__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -108253,11 +108409,13 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])("password", {
     return value === target;
   },
   message: "Password confirmation does not match"
-});
+}); // Import component
 
-Vue.use(vue_browser_geolocation__WEBPACK_IMPORTED_MODULE_3___default.a);
+ // Import stylesheet
 
-Vue.use(vue_geolocation_api__WEBPACK_IMPORTED_MODULE_4__["default"]);
+ // Init plugin
+
+Vue.use(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_3___default.a);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

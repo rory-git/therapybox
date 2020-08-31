@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -35,7 +36,14 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        Todo::create([
+            'title' => 'Untitled',
+            'complete' => false,
+            'user_id' => $request->user_id
+        ]);
+
+        return Todo::all();
     }
 
     /**
@@ -82,8 +90,10 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
-        //
+        Todo::destroy($id);
+
+        return Todo::all();
     }
 }

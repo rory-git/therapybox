@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <todos />
+<todos />
 </div>
 @endsection
 
 <script>
-   
+   window.todos = @json(Auth::user()->todos);
 </script>
