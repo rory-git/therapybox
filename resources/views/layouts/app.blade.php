@@ -39,9 +39,12 @@
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto flex ">
+                            @if (Auth::check())
                             <li class="nav-item mr-3">
                                 <a class="nav-link" href="{{ url('') }}">{{ __('Home') }}</a>
                             </li>
+                            @endif
+
                             <!-- Authentication Links -->
                             @guest
                             <li class="nav-item mr-3">
