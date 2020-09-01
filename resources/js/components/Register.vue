@@ -71,7 +71,9 @@
                                         class=" text-white w-full bg-transparent border-b-2 border-white"
                                         placeholder="Confirm Password"
                                     />
-                                    <span>{{ errors[0] }}</span>
+                                    <span class="text-white">{{
+                                        errors[0]
+                                    }}</span>
                                 </ValidationProvider>
                             </div>
                         </div>
@@ -131,6 +133,7 @@ export default {
             }
         },
         submit() {
+            let loader = this.$loading.show();
             axios
                 .post("/register", this.form)
                 .then(res => {
@@ -138,6 +141,7 @@ export default {
                 })
                 .catch(errors => {
                     this.errors = errors.response.data.errors;
+                    loader.hide();
                 });
         }
     }

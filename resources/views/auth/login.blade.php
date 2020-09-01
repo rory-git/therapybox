@@ -10,8 +10,8 @@
             @csrf
 
             <div class="flex flex-col justify-between py-24" style="min-height:500px;">
-                <div class="flex -mx-24">
-                    <div class="md:w-1/2 px-24">
+                <div class="md:flex -mx-24">
+                    <div class="md:w-1/2 py-5 px-24">
                         <div class="col-md-6">
                             <input id="username" type="text"
                                 class="text-white w-full bg-transparent border-b-2 border-white @error('username') is-invalid @enderror"
@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-                    <div class="md:w-1/2 px-24">
+                    <div class="md:w-1/2 py-5 px-24">
 
                         <div class="col-md-6">
                             <input id="password" type="password"

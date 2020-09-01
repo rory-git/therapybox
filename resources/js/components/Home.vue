@@ -5,7 +5,7 @@
             <div class="">
                 <h1 class="text-white text-center">
                     Good Day
-                    <span class="capitalize ">{{ user.username }}</span>
+                    <span class="capitalize ">{{ user.username }}!</span>
                 </h1>
             </div>
         </div>
@@ -14,17 +14,8 @@
                 class="card-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
             >
                 <weather-card />
+                <sports-card />
 
-                <div class="card">
-                    <div class="header bg-yellow-400 text-center p-4">
-                        <a href="/sports" class="hover:underline"
-                            ><h3>Sport</h3></a
-                        >
-                    </div>
-                    <div class="body">
-                        <h4>Sports Headline</h4>
-                    </div>
-                </div>
                 <news-card />
                 <div class="card">
                     <div class="header bg-yellow-400 text-center p-4">

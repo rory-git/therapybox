@@ -1,9 +1,11 @@
 <template>
     <div class="card">
         <div class="header bg-yellow-400 text-center p-4">
-            <h3>News</h3>
+            <a href="/news" class="hover:underline">
+                <h3>News</h3>
+            </a>
         </div>
-        <div class="body"  v-if="feed">
+        <div class="body" v-if="feed">
             <div>
                 <a :href="feed.items[0].link" target="_blank">
                     <h4>{{ feed.items[0].title }}</h4>
@@ -28,7 +30,6 @@ export default {
         };
     },
     mounted() {
-        
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
         let parser = new Parser();
