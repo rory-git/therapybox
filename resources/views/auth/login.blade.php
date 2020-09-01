@@ -45,7 +45,7 @@
 
                 <div class="text-center">
                     <button type="submit" class="bg-yellow-400 px-20 py-3 rounded-full">Login</button>
-                    <div class="py-5">
+                    <div class="py-5 text-white">
                         New to the Challenge? <a href="/register" class="text-yellow-400">Sign Up</a>
                     </div>
                 </div>
