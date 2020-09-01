@@ -30,9 +30,10 @@
                                     v-for="(image, index) in photos"
                                     :key="index"
                                     class="relative"
+                                    style="height:100px;"
                                 >
                                     <img
-                                        class="w-full object-cover"
+                                        class="w-full h-full object-cover"
                                         :src="image"
                                         alt=""
                                     />
