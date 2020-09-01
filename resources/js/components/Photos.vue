@@ -4,7 +4,12 @@
 
         <div class="grid grid-cols-3 gap-4">
             <div v-for="(image, index) in photos" :key="index" class="relative">
-                <img class="w-full h-full object-cover" :src="image" alt="" />
+                <img
+                    class="w-full h-full object-contain"
+                    :src="image"
+                    alt=""
+                    style="height:280px"
+                />
                 <!-- <span class="absolute top-0 left-0 p-3 text-white bg-red-600 cursor-pointer" @click="remove(index)">DELETE</span> -->
             </div>
         </div>
