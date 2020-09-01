@@ -90487,7 +90487,7 @@ var render = function() {
       _vm._l(_vm.photos, function(image, index) {
         return _c("div", { key: index, staticClass: "relative" }, [
           _c("img", {
-            staticClass: "w-full object-cover",
+            staticClass: "w-full h-full object-cover",
             attrs: { src: image, alt: "" }
           })
         ])
